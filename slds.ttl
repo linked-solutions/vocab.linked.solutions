@@ -1,0 +1,109 @@
+@base <https://vocab.linked.solutions/slds/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<> a owl:Ontology;
+    dcterms:title "SLDS Ontology"@en;
+    dcterms:description "Some terms used in he configuration of Simple Linked Data Server (SLDS)."@en.
+
+<Instance> a rdfs:Class;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "Instance" ;
+    skos:definition "An Instance of SLDS" ;
+    rdfs:comment "An instance of this class is the root of the configuration".
+
+<port> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "port"@en ;
+    skos:definition "Points to the port to which SLDS shall listen to."@en;
+    rdfs:domain <Instance>;
+    rdfs:range xsd:int .
+
+<resourceDescriptionProvider> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "resourceDescriptionProvider"@en ;
+    skos:definition "Points to a provider of descriptions for resources served by the subject."@en;
+    rdfs:domain <Instance>;
+    rdfs:range <ResourceDescriptionProvider> .
+
+<javaClass> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "javaClass"@en ;
+    skos:definition """Points to the fully qualified name of a class implementing the subject, this class
+    must implement solutions.linked.slds.ResourceDescriptionProvider"""@en;
+    rdfs:domain <ResourceDescriptionProvider> ;
+    rdfs:range xsd:string .
+
+<iriTranslators> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "iriTranslators"@en ;
+    skos:definition "Point to a list of IriTranslators to be applied on the named resources provided by the subject."@en;
+    rdfs:domain <ResourceDescriptionProvider> ;
+    rdfs:range rdf:List .
+
+<javaClass> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "javaClass"@en ;
+    skos:definition """Points to the fully qualified name of a class implementing the subject, this class
+    must implement solutions.linked.slds.ResourceDescriptionProvider"""@en;
+    rdfs:domain <ResourceDescriptionProvider> ;
+    rdfs:range xsd:string .
+
+<sparqlEndpoint> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "sparqlEndpoint"@en ;
+    skos:definition "Points to the SPARQL Endpoint to be use by the subject."@en;
+    rdfs:domain <ResourceDescriptionProvider> ;
+    rdfs:range <SparqlEndpoint> .
+
+<SparqlEndpoint> a rdfs:Class;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "SparqlEndpoint" ;
+    skos:definition "A SparqlEndpoint" ;
+    rdfs:comment "A resource supporting the SPARQL protocol".
+
+<file> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "file"@en ;
+    skos:definition """Points to a file used by the subject."""@en;
+    rdfs:domain <ResourceDescriptionProvider> ;
+    rdfs:range xsd:string .
+
+<resource> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "resource"@en ;
+    skos:definition """Points to a resource considered by the subject."""@en;
+    rdfs:domain <ResourceDescriptionProvider> .
+
+<userName> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "userName"@en ;
+    skos:definition """Points to the user name to be used to access the subject."""@en;
+    rdfs:domain <SparqlEndpoint> ;
+    rdfs:range xsd:string .
+
+<password> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "password"@en ;
+    skos:definition """Points to the password to be used to access the subject."""@en;
+    rdfs:domain <SparqlEndpoint> ;
+    rdfs:range xsd:string .
+
+<disableResourceContext> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "disableResourceContext"@en ;
+    skos:definition """If set to true the context (symmetric consice bounded description) of the requested resource
+    is not included in the response."""@en;
+    rdfs:domain <ResourceDescriptionProvider> ;
+    rdfs:range xsd:boolean .
+
+<disableNamedGraph> a rdf:Property ;
+    rdfs:isDefinedBy <> ;
+    skos:prefLabel "disableNamedGraph"@en ;
+    skos:definition """If set to true the graph named by the object is not included in the response."""@en;
+    rdfs:domain <ResourceDescriptionProvider> ;
+    rdfs:range xsd:boolean .
